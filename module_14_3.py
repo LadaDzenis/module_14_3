@@ -5,7 +5,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
 
-api = ''
+api = '7722693863:AAF_32Cgx5b8T88Z7abLJhFBUzVrOL8abLo'
 bot = Bot(token = api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -42,15 +42,11 @@ kb_2  = InlineKeyboardMarkup(
 
 @dp.message_handler(text=['Купить'])
 async def get_buying_list(message):
-    with open("files/11.jpg", "rb") as img:
-        await message.answer_photo(img, f"Название: Product{1} | Описание: описание {1} | Цена: {1*100}", reply_markup = kb)
-    with open("files/22.jpg", "rb") as img:
-        await message.answer_photo(img, f"Название: Product{2} | Описание: описание {2} | Цена: {2*100}", reply_markup = kb)
-    with open("files/33.jpg", "rb") as img:
-        await message.answer_photo(img, f"Название: Product{3} | Описание: описание {3} | Цена: {3*100}", reply_markup = kb)
-    with open("files/44.jpg", "rb") as img:
-        await message.answer_photo(img, f"Название: Product{4} | Описание: описание {4} | Цена: {4*100}", reply_markup = kb)
-    await message.answer('Выберите продукт для покупки:', reply_markup=catalog_Inline)
+    for i in range(1, 5):
+        await message.answer(f'Название: Product{i} | Описание: описание{i} | Цена: {i * 100}')
+        with open(f'{str(i) + str(i) + ".jpg"}', 'rb') as img:
+            await message.answer_photo(img)
+    await message.answer(text='Выберите продукт для покупки: ', reply_markup=catalog_Inline)
 
 @dp.message_handler(text=['Рассчитать'])
 async def main_menu(message):
